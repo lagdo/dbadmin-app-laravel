@@ -22,8 +22,8 @@ class CreateUser extends Command
      * @var string
      */
     protected $signature = 'user:create
-                            {--name= : The new user name}
-                            {--email= : The new user email}';
+        {--a|name= : The new user name}
+        {--m|email= : The new user email}';
 
     /**
      * The console command description.
