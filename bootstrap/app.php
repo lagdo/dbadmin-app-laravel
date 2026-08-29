@@ -33,7 +33,7 @@ return Application::configure(basePath: dirname(__DIR__))
         // When the session expires, redirect any Jaxon request to the login page.
         $exceptions->respond(function (Response $response) {
             $jaxon = app()->make(Jaxon::class);
-            if ($response->getStatusCode() !== 419 || !$jaxon->canProcessRequest()) {
+            if (!in_array($response->getStatusCode(), [302, 419]) || !$jaxon->canProcessRequest()) {
                 return $response;
             }
 

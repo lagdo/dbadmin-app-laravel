@@ -1,28 +1,33 @@
 <?php
 
+use Illuminate\Support\Facades;
 use Illuminate\Support\Str;
 use Lagdo\DbAdmin\Support\Facade\Auth;
 use Lagdo\DbAdmin\Support\Provider;
 use Lagdo\DbAdmin\Support\Service;
 
 return [
-    'admin' => [
-        'ui' => [
-            'toast' => [
-                'lib' => 'butterup',
-            ],
-            'query' => [
-                // 'cm' for CodeMirror or 'ace' for Ace Editor.
-                'editor' => 'cm',
-            ],
+    'ui' => [
+        'template' => 'bootstrap5',
+        'assets' => [
+            'url' => '/dbadmin',
         ],
+        'toast' => [
+            'lib' => 'butterup',
+        ],
+        'query' => [
+            // 'cm' for CodeMirror or 'ace' for Ace Editor.
+            'editor' => 'cm',
+        ],
+    ],
+    'admin' => [
         'queries' => [
             'save' => [
                 'editor' => false,
                 'builder' => false,
                 'library' => false,
             ],
-            'enable' => [
+            'show' => [
                 'preferences' => false,
                 'history' => false,
                 'favorite' => false,
@@ -54,11 +59,11 @@ return [
     'auth' => fn() => new class implements Provider\AuthInterface {
         public function userId(): string
         {
-            return auth()->user()->email ?? '';
+            return Facades\Auth::user()->email ?? '';
         }
         public function name(): string
         {
-            return auth()->user()->name ?? '';;
+            return Facades\Auth::user()->name ?? '';;
         }
         public function roles(): array
         {

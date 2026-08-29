@@ -8,12 +8,6 @@ return [
                 'dir' => storage_path('dbadmin/attributes'),
             ],
         ],
-        'template' => [
-            'name' => 'bootstrap5',
-            'assets' => [
-                'url' => '/dbadmin',
-            ],
-        ],
         'assets' => [
             'export' => true,
             'minify' => true,
