@@ -11,10 +11,9 @@ use Jaxon\Laravel\App\Jaxon;
 use Lagdo\DbAdmin\App\DbAuditPackage;
 use Lagdo\DbAdmin\Driver\Utils\TranslatorInterface;
 use Lagdo\DbAdmin\Support\Provider\AuthInterface;
+use Lagdo\DbAdmin\Support\Service\Export\FileSystemInterface;
 
 use function base_path;
-use function config;
-use function in_array;
 
 class DbAdminServiceProvider extends ServiceProvider
 {
@@ -23,12 +22,15 @@ class DbAdminServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        // The facade needs this to be defined.
+        // The facades need this to be defined.
         $this->app->singleton(AuthInterface::class, function(Application $app) {
             return $app->make(Jaxon::class)->di()->g(AuthInterface::class);
         });
         $this->app->singleton(TranslatorInterface::class, function(Application $app) {
             return $app->make(Jaxon::class)->di()->g(TranslatorInterface::class);
+        });
+        $this->app->singleton(FileSystemInterface::class, function(Application $app) {
+            return $app->make(Jaxon::class)->di()->g(FileSystemInterface::class);
         });
     }
 
