@@ -1,4 +1,4 @@
-jaxon.config.requestURI = '/jaxon';
+jaxon.config.requestURI = 'http://localhost:7301/jaxon';
 jaxon.config.statusMessages = false;
 jaxon.config.waitCursor = true;
 jaxon.config.version = 'Jaxon 5.x';

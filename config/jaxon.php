@@ -11,8 +11,8 @@ return [
         'assets' => [
             'export' => true,
             'minify' => true,
-            'uri' => '/jaxon/app-0.9.0',
-            'dir' => public_path('/jaxon/app-0.9.0'),
+            'uri' => '/jaxon/app-0.11.0',
+            'dir' => public_path('/jaxon/app-0.11.0'),
             // 'file' => '',
         ],
         'dialogs' => [
