@@ -1,4 +1,4 @@
-@extends('auth.layout')
+@extends('coreui5.auth.layout')
 
 @section('pageTitle', __('Login'))
 

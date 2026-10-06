@@ -1,12 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Lagdo\DbAdmin\App\DbAdminPackage;
-use Lagdo\DbAdmin\App\DbAuditPackage;
 use Lagdo\DbAdmin\Support\Facade\FileSystem;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 
-Route::get('/', fn() => view('dbadmin', ['package' => DbAdminPackage::class]))
+Route::get('/', fn() => view('dbadmin::dbadmin'))
     ->middleware(['auth', 'jaxon.dbadmin.config']);
 
 Route::post('/jaxon', fn() => response()->json([]))
@@ -21,7 +19,7 @@ Route::get('/export/{filename}', function(string $filename) {
 })->middleware(['auth', 'jaxon.dbadmin.config'])
     ->name('dbadmin.file');
 
-Route::get('/audit', fn() => view('dbaudit', ['package' => DbAuditPackage::class]))
+Route::get('/audit', fn() => view('dbadmin::dbaudit'))
     ->middleware(['auth', 'jaxon.dbaudit.config'])
     ->name('dbaudit');
 

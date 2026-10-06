@@ -31,7 +31,7 @@ class FortifyServiceProvider extends ServiceProvider
     {
         // Login view
         Fortify::loginView(function() {
-            return view('auth.login');
+            return view('sb-admin.auth.login');
         });
         // Fortify::registerView(function() {
         //     return view('auth.register');

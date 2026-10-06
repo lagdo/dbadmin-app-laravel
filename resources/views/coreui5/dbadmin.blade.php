@@ -1,5 +1,5 @@
 @inject('jaxon', Jaxon\Laravel\App\Jaxon::class)
-@extends('layout')
+@extends('coreui5.layout')
 
 @section('css')
   @jxnCss
@@ -10,12 +10,12 @@
 
   @jxnScript
 <script type='text/javascript'>
-  @jxnPackage($package, 'ready');
+  @jxnPackage(Lagdo\DbAdmin\App\DbAdminPackage::class, 'ready');
 </script>
 @endsection
 
 @section('content')
         <div class="container-fluid px-3">
-          {!! $jaxon->package($package)->layout() !!}
+          {!! $jaxon->package(Lagdo\DbAdmin\App\DbAdminPackage::class)->layout() !!}
         </div>
 @endsection
