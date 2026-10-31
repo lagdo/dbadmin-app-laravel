@@ -17,7 +17,6 @@
     },
     "require": {
         "php": "^8.3",
-        "alibabacloud/kms-20160120": "^2.0",
         "aws/aws-sdk-php": "^3.379",
         "csharpru/vault-php": "^4.4",
         "infisical/php-sdk": "^0.0.2",
@@ -25,15 +24,17 @@
         "google/cloud-secret-manager": "^2.3",
         "jaxon-php/jaxon-laravel": "^5.0",
         "jaxon-php/jaxon-upload": "^2.1",
-        "lagdo/ui-builder-bootstrap5": "0.14.*",
+        "lagdo/ui-builder-bootstrap5": "0.15.*",
+        "lagdo/ui-builder-bulma": "0.1.*",
         "lagdo/dbadmin-driver-mysql": "0.23.*",
         "lagdo/dbadmin-driver-pgsql": "0.23.*",
         "lagdo/dbadmin-driver-sqlite": "0.23.*",
-        "lagdo/jaxon-dbadmin": "0.36.*",
+        "lagdo/jaxon-dbadmin": "0.37.*",
         "lagdo/laravel-facades": "^1.0",
         "laravel/fortify": "^1.37",
         "laravel/framework": "^13.8",
-        "laravel/tinker": "^3.0"
+        "laravel/tinker": "^3.0",
+        "psr/log": "^3.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

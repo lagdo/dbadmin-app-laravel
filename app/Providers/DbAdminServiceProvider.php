@@ -11,6 +11,7 @@ use Jaxon\Laravel\App\Jaxon;
 use Lagdo\DbAdmin\App\DbAuditPackage;
 use Lagdo\DbAdmin\Driver\Utils\TranslatorInterface;
 use Lagdo\DbAdmin\Support\Provider\AuthInterface;
+use Lagdo\DbAdmin\Support\Service\Export\DatabaseReader;
 use Lagdo\DbAdmin\Support\Service\Export\FileSystemInterface;
 
 use function base_path;
@@ -32,6 +33,9 @@ class DbAdminServiceProvider extends ServiceProvider
         $this->app->singleton(FileSystemInterface::class, function(Application $app) {
             return $app->make(Jaxon::class)->di()->g(FileSystemInterface::class);
         });
+        $this->app->singleton(DatabaseReader::class, function(Application $app) {
+            return $app->make(Jaxon::class)->di()->g(DatabaseReader::class);
+        });
     }
 
     /**
@@ -44,8 +48,7 @@ class DbAdminServiceProvider extends ServiceProvider
         $dotenv->safeLoad();
 
         // Auth gate for the DbAdmin audit page
-        Gate::define('audit', fn(User $user) =>
-            $this->app->make(Jaxon::class)->di()
-                ->g(DbAuditPackage::class)->checkAccess($user->email));
+        Gate::define('audit', fn(User $user) => $this->app->make(Jaxon::class)
+            ->di()->g(DbAuditPackage::class)->checkAuditAccess($user->email));
     }
 }

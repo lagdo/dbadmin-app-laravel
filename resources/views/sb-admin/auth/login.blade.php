@@ -25,7 +25,6 @@
 
                     <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
                       <span>&nbsp;</span>
-                      {{-- <a class="small" href="password.html">{{ __('Forgot Your Password?') }}</a> --}}
                       <button type="submit" class="btn btn-primary" tabindex="4">{{ __('Login') }}</button>
                     </div>
                   </form>

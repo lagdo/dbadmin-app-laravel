@@ -1,4 +1,3 @@
-@inject('jaxon', Jaxon\Laravel\App\Jaxon::class)
 @extends('plain-admin.layout')
 
 @section('css')
@@ -10,12 +9,12 @@
 
   @jxnScript
 <script type='text/javascript'>
-  @jxnPackage(Lagdo\DbAdmin\App\DbAdminPackage::class, 'ready');
+  @jxnPackage($package, 'ready');
 </script>
 @endsection
 
 @section('content')
         <div class="container-fluid px-3">
-          {!! $jaxon->package(Lagdo\DbAdmin\App\DbAdminPackage::class)->layout() !!}
+          {!! $di->g($ui)->layout() !!}
         </div>
 @endsection

@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Lagdo\DbAdmin\Support\Facade\FileSystem;
+use Lagdo\DbAdmin\Support\Facade\Export;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 
 Route::get('/', fn() => view('dbadmin::dbadmin'))
@@ -12,10 +12,27 @@ Route::post('/jaxon', fn() => response()->json([]))
     ->name('dbadmin.jaxon');
 
 Route::get('/export/{filename}', function(string $filename) {
-    $fs = FileSystem::instance();
-    return response($fs?->read($filename) ?? 'No export reader set.')
-        ->header('Content-Type', 'text/plain')
-        ->setStatusCode(!!$fs ? 200 : 403);
+    $options = Export::options($filename);
+    $exports = Export::export($options);
+    return $exports === null ?
+        response("Unable to export file $filename.")
+            ->header('Content-Type', 'text/plain')
+            ->setStatusCode(403) :
+        response()->streamDownload(function() use($exports) {
+            foreach ($exports as $export) {
+                echo $export;
+                if (ob_get_level() > 0) {
+                    ob_flush();
+                }
+                flush();
+            }
+        }, $options->filename, [
+            'Content-Type' => $options->contentType(),
+            'Content-Disposition' => $options->contentDisposition(),
+            'Cache-Control' => 'no-cache',
+            'Connection' => 'keep-alive',
+            'X-Accel-Buffering' => 'no',
+        ]);
 })->middleware(['auth', 'jaxon.dbadmin.config'])
     ->name('dbadmin.file');
 

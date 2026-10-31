@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use Lagdo\DbAdmin\App\DbAuditPackage;
+use Lagdo\DbAdmin\App\Ui\AuditUiBuilder;
 use Symfony\Component\HttpFoundation\Response;
 use Closure;
 
@@ -26,8 +27,14 @@ class DbAuditMiddleware
         DbAuditPackage::register(config_path('/dbadmin'), route('dbaudit.jaxon'));
 
         // Register the view namespace
-        $template = jaxon()->getAppOption('template', '');
+        $jaxon = jaxon();
+        $template = $jaxon->getAppOption('template', '');
         View::addNamespace('dbadmin', resource_path("views/$template"));
+        View::share([
+            'di' => $jaxon->di(),
+            'ui' => AuditUiBuilder::class,
+            'package' => DbAuditPackage::class,
+        ]);
 
         return $next($request);
     }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\FortifyMiddleware;
 use Laravel\Fortify\Features;
 
 return [
@@ -101,7 +102,7 @@ return [
     |
     */
 
-    'middleware' => ['web'],
+    'middleware' => ['web', FortifyMiddleware::class],
 
     /*
     |--------------------------------------------------------------------------
@@ -155,5 +156,4 @@ return [
         //     // 'window' => 0,
         // ]),
     ],
-
 ];
