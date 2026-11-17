@@ -11,8 +11,8 @@ use Jaxon\Laravel\App\Jaxon;
 use Lagdo\DbAdmin\App\DbAuditPackage;
 use Lagdo\DbAdmin\Driver\Utils\TranslatorInterface;
 use Lagdo\DbAdmin\Support\Provider\AuthInterface;
-use Lagdo\DbAdmin\Support\Service\Export\DatabaseReader;
-use Lagdo\DbAdmin\Support\Service\Export\FileSystemInterface;
+use Lagdo\DbAdmin\Support\Service\Export\ExportService;
+use Lagdo\DbAdmin\Support\Service\Import\ImportService;
 
 use function base_path;
 
@@ -30,11 +30,11 @@ class DbAdminServiceProvider extends ServiceProvider
         $this->app->singleton(TranslatorInterface::class, function(Application $app) {
             return $app->make(Jaxon::class)->di()->g(TranslatorInterface::class);
         });
-        $this->app->singleton(FileSystemInterface::class, function(Application $app) {
-            return $app->make(Jaxon::class)->di()->g(FileSystemInterface::class);
+        $this->app->singleton(ExportService::class, function(Application $app) {
+            return $app->make(Jaxon::class)->di()->g(ExportService::class);
         });
-        $this->app->singleton(DatabaseReader::class, function(Application $app) {
-            return $app->make(Jaxon::class)->di()->g(DatabaseReader::class);
+        $this->app->singleton(ImportService::class, function(Application $app) {
+            return $app->make(Jaxon::class)->di()->g(ImportService::class);
         });
     }
 
