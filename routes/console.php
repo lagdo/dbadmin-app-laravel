@@ -8,7 +8,7 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote');
 
 Artisan::command('user:localdb', function () {
-    $dbFile = env('DB_DATABASE', database_path('dbadmin.sqlite'));
+    $dbFile = config('database.connections.sqlite.database');
     if (!file_exists($dbFile)) {
         touch($dbFile);
     }
